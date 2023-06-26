@@ -220,20 +220,21 @@ import Editpop from "./editPopUp";
         </div>)
          })}
         </div><br/>
-         {mainNotes.length !== 0?
+        <div style={{textAlign:"center",display:"flex",justifyContent:"center",position:"relative"}}>
+        {mainNotes.length !== 0?
+        <Stack spacing={2}>
+        <Pagination 
+          count={noofPages}
+          variant="outlined" 
+          shape="rounded" 
+          page={page}
+          onChange={handlePaginationChange}
+          />
+        </Stack>:
+       <p>emply........</p> 
+    }
       
-          <div style={{textAlign:"center",display:"flex",justifyContent:"center",position:"relative"}}>
-          <Stack spacing={2}>
-             <Pagination 
-               count={noofPages}
-               variant="outlined" 
-               shape="rounded" 
-               page={page}
-               onChange={handlePaginationChange}
-               />
-           </Stack>
-          </div>:<p>emply........</p> 
-        }
+          </div>
     </div>
   );
 }
