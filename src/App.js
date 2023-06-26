@@ -216,8 +216,8 @@ import Editpop from "./editPopUp";
             return (<div className="card" key={index}
               style={
                 {
-                  boxShadow:note.pinned?"2px 2px 2px 1px rgba(113, 238, 81, 0.61)":"4px 4px 2px 2px rgba(0,0,0,0.2)",
-                  border:note.pinned?"0.3px solid rgba(113, 238, 81, 0.61)":"0.3px solid rgba(0,0,0,0.2)"}}
+                  boxShadow:note.pinned?"4px 4px 2px 2px #000205":"4px 4px 2px 2px rgba(0,0,0,0.2)",
+                  border:note.pinned?"0.6px solid #bbc2c9":"0.3px solid rgba(0,0,0,0.2)"}}
               >
 
             <div className="card-head">
@@ -240,8 +240,8 @@ import Editpop from "./editPopUp";
             </div>
             <div style={{display:"flex",justifyContent:"space-between"}}>
             <div style={{display:"flex",justifyContent:"space-between",cursor:"pointer",width:"18%"}}>
-              <Editpop props={{...note,notes,setNotes,tmpNotesDis,setTmpNotesDis,notify}}/>
-              <FontAwesomeIcon icon={faTrash} size="sm" onClick={()=>deleteNote(note.id,note)}/>
+              <Editpop props={{...note,notes,setNotes,tmpNotesDis,setTmpNotesDis,notify}}/>|
+              <FontAwesomeIcon icon={faTrash} size="sm" onClick={()=>deleteNote(note.id,note)}/>|
               <FontAwesomeIcon icon={faClone} style={{color: "#111b2c"}} onClick={()=>createCopy(note.id)}/>
             </div>
             <p style={{fontFamily:"monospace",fontSize:'small'}}>edit {note.lastEdited}</p>
