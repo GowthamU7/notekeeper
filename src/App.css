@@ -1,5 +1,5 @@
 .header{
-  background-color: rgba(0, 0, 0, 0.815);
+  background-color: rgba(193, 66, 231, 0.404);
   text-align: center;
   height: 70px;
   display: flex;
@@ -12,7 +12,7 @@
 
 .header a[class="icon"]{
   text-decoration: none;
-  color: rgb(197, 197, 197);
+  color: rgb(17, 1, 1);
   vertical-align: middle;
   position: absolute;
   top: 50%;
@@ -21,7 +21,7 @@
 
 .header a[class="about"]{
   text-decoration: none;
-  color: rgb(197, 197, 197);
+  color: rgb(17, 7, 7);
   vertical-align: middle;
   position: absolute;
   top: 50%;
@@ -36,12 +36,19 @@
 }
 
 .takeanote button{
-  background-color: #d8d8d8da;
   color: black;
   border: none;
   margin: 2px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.takeanote button:hover{
+  box-shadow: 2px 1px 2px 1px #d861e731;
+}
+
+.takeanote button:active{
+  box-shadow: none;
 }
 
 .takeanote,input,textarea{

@@ -157,7 +157,7 @@ import Editpop from "./editPopUp";
     <div className="Home">
       <Toaster/>
         <div className="header">
-            <a className="icon" href="/notekeeper"><FontAwesomeIcon size="xl" icon={faClipboard} style={{color: "#d6d6d6",}} /> Note Keeper</a>
+            <a className="icon" href="/notekeeper"><FontAwesomeIcon size="xl" icon={faClipboard} style={{color: "rgb(17, 1, 1)",}} /> Note Keeper</a>
             <a className="about" href="#">about</a>
         </div><br/>
         <div className="notetaker">
