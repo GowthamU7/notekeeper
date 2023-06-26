@@ -231,7 +231,7 @@ import Editpop from "./editPopUp";
           onChange={handlePaginationChange}
           />
         </Stack>:
-       <p>emply........</p> 
+       <p>empty........</p> 
     }
       
           </div>
