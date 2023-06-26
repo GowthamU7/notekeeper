@@ -66,27 +66,13 @@
 
 .notes{
   display: grid;
-}
-
-@media only screen and (max-width:750px) {
-  .notes{
-    grid-template-areas: 
-    'main'
-    'main'
-    'main'
-    'main'
-    'main'
-    'main'
-    ;
-    column-gap: 30px;
+  column-gap: 30px;
     row-gap: 20px;
     align-self: center;
-  
-  }
 }
 
+
 .notes{
-  
   display: grid;
   grid-template-areas: 
   'main main main'
@@ -97,17 +83,20 @@
   align-self: center;
 }
 
+@media only screen and (max-width:700px) {
+  .notes{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
 @media only screen and (max-width: 1200px) {
   .notes{
-    display: grid;
-  grid-template-areas: 
+   grid-template-areas: 
   'main main'
   'main main'
-  'main main'
-  ;
-  column-gap: 30px;
-  row-gap: 20px;
-  align-self: center;
+  'main main';
   
   }
 }
@@ -121,6 +110,7 @@
     width: 300px;
     word-wrap: break-word;
     height: fit-content;
+    grid-area: "main";
 }
 
 .card-head{
