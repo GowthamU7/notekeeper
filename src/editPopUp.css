@@ -10,8 +10,18 @@
 
 .content{
     border-radius: 20px;
+    text-align: center;
+    align-items: center;
 }
 
 .modal{
     border-radius: 20px;
+}
+
+.content button:hover{
+    box-shadow: 2px 1px 4px 2px rgba(154, 248, 92, 0.589);
+}
+
+.content button:active{
+    box-shadow: none;
 }

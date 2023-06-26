@@ -10,7 +10,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark,faTrash,faClipboard,faPlus} from "@fortawesome/free-solid-svg-icons"
+import { faBookmark,faTrash,faClipboard,faPlus,faClone} from "@fortawesome/free-solid-svg-icons"
 
 
 
@@ -150,6 +150,35 @@ import Editpop from "./editPopUp";
     setPage(vl)
   }
 
+  async function createCopy(id){
+
+    notify('Copy create','success')
+    let tmpNotes = tmpNotesDis.length === 0 ?notes:tmpNotesDis
+    let copy
+    for(let i=0;i<tmpNotes.length;i++){
+      if(tmpNotes[i].id === id){
+        copy = tmpNotes[i]
+        break
+      }
+    }
+
+    let dateobj = new Date()
+    let date = dateobj.getUTCDate()+"-"+dateobj.getUTCMonth()+"-"+dateobj.getFullYear()
+    let time = dateobj.getHours()+":"+dateobj.getMinutes()+":"+dateobj.getSeconds()
+
+    copy.lastEdited = date+","+time
+    copy.pinned = false
+    tmpNotes.push(copy)
+    setNoofPages(Math.ceil(tmpNotes.length/6))
+    await addDoc(notesCollection,copy)
+    setTmpNotesDis(tmpNotes)
+    setNotes([])
+
+    window.location.reload()
+  
+
+  }
+
   let mainNotes = tmpNotesDis.length === 0 ? notes : tmpNotesDis
   mainNotes = mainNotes.slice(page===1?0:(6*(page-1)),(6*(page-1))+6)
   
@@ -210,12 +239,12 @@ import Editpop from "./editPopUp";
                 <p>{note.body}</p>
             </div>
             <div style={{display:"flex",justifyContent:"space-between"}}>
-            <div style={{display:"flex",justifyContent:"space-between",cursor:"pointer",width:"12%"}}>
-            
+            <div style={{display:"flex",justifyContent:"space-between",cursor:"pointer",width:"18%"}}>
               <Editpop props={{...note,notes,setNotes,tmpNotesDis,setTmpNotesDis,notify}}/>
               <FontAwesomeIcon icon={faTrash} size="sm" onClick={()=>deleteNote(note.id,note)}/>
+              <FontAwesomeIcon icon={faClone} style={{color: "#111b2c"}} onClick={()=>createCopy(note.id)}/>
             </div>
-            <p style={{fontFamily:"monospace",fontSize:'small'}}>edited {note.lastEdited}</p>
+            <p style={{fontFamily:"monospace",fontSize:'small'}}>edit {note.lastEdited}</p>
             </div>
         </div>)
          })}
