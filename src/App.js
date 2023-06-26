@@ -10,7 +10,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark,faTrash,faClipboard} from "@fortawesome/free-solid-svg-icons"
+import { faBookmark,faTrash,faClipboard,faPlus} from "@fortawesome/free-solid-svg-icons"
 
 
 
@@ -176,19 +176,19 @@ import Editpop from "./editPopUp";
           </div>
         </div>
         :    
-        <div className="notetaker" onClick={()=>setShowAddNotes(true)}>
-            <p style={{textDecoration:"underline",cursor:"pointer"}}>Take a note</p>
-        </div>    
+        <div className="notetaker" style={{cursor:"pointer"}} onClick={()=>setShowAddNotes(true)}>
+            <FontAwesomeIcon icon={faPlus} bounce={true} size="2xl" style={{color: "rgba(113, 238, 81, 0.61)",}} />
+        </div>
         }
         
-        </div>
+        </div><br/>
         <div className="notes" onClick={()=>setShowAddNotes(false)}>
           {mainNotes.map((note,index)=>{
             return (<div className="card" key={index}
               style={
                 {
-                  boxShadow:note.pinned?"2px 2px 2px 1px rgb(18, 24, 11)":"4px 4px 2px 2px rgba(0,0,0,0.2)",
-                  border:note.pinned?"0.3px solid black":"0.3px solid rgba(0,0,0,0.2)"}}
+                  boxShadow:note.pinned?"2px 2px 2px 1px rgba(113, 238, 81, 0.61)":"4px 4px 2px 2px rgba(0,0,0,0.2)",
+                  border:note.pinned?"0.3px solid rgba(113, 238, 81, 0.61)":"0.3px solid rgba(0,0,0,0.2)"}}
               >
 
             <div className="card-head">
