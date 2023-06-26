@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/notekeeper/static/css/main.1a78adfc.css",
-    "main.js": "/notekeeper/static/js/main.8f7b32fe.js",
+    "main.css": "/notekeeper/static/css/main.74276fb9.css",
+    "main.js": "/notekeeper/static/js/main.55aafe75.js",
     "index.html": "/notekeeper/index.html",
-    "main.1a78adfc.css.map": "/notekeeper/static/css/main.1a78adfc.css.map",
-    "main.8f7b32fe.js.map": "/notekeeper/static/js/main.8f7b32fe.js.map"
+    "main.74276fb9.css.map": "/notekeeper/static/css/main.74276fb9.css.map",
+    "main.55aafe75.js.map": "/notekeeper/static/js/main.55aafe75.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a78adfc.css",
-    "static/js/main.8f7b32fe.js"
+    "static/css/main.74276fb9.css",
+    "static/js/main.55aafe75.js"
   ]
 }
