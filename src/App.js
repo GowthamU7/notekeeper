@@ -4,19 +4,19 @@ import { db } from "./firebase"
 import { collection,getDocs,addDoc, doc,deleteDoc,updateDoc } from 'firebase/firestore'
 
 
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-
 import "./App.css"
 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark,faTrash,faPenToSquare} from "@fortawesome/free-solid-svg-icons"
+import { faBookmark,faTrash,faClipboard} from "@fortawesome/free-solid-svg-icons"
+
+
 
 import toast,{Toaster} from 'react-hot-toast'
-import { Typography } from "@mui/material";
+
+import Editpop from "./editPopUp";
 
   function App() { 
   
@@ -39,6 +39,7 @@ import { Typography } from "@mui/material";
               if(doc.data().pinned) pinnedNotes.push({...doc.data(),id:doc.id})
               else unpinnedNotes.push({...doc.data(),id:doc.id})
            })
+      
           if(pinnedNotes.length > 0){
             setNoofPages(Math.ceil(pinnedNotes.concat(unpinnedNotes).length/6))
             setNotes(pinnedNotes.concat(unpinnedNotes))
@@ -106,8 +107,7 @@ import { Typography } from "@mui/material";
 
     note.pinned = pinStatus
     dataSorter(note,pinStatus,updateNoteIndex)
-    console.log("tmp = ",tmpNotesDis)
-    console.log("notes = ",notes)
+
     let newData = {pinned:pinStatus}
     await updateDoc(noteDoc,newData)
     notify(pinStatus?"Pinned successfully":"UnPinned Succesfully","info")
@@ -150,47 +150,6 @@ import { Typography } from "@mui/material";
     setPage(vl)
   }
 
-  function Save(id){
-    let dateobj = new Date()
-    let date = dateobj.getUTCDate()+"-"+dateobj.getUTCMonth()+"-"+dateobj.getFullYear()
-    let time = dateobj.getHours()+":"+dateobj.getMinutes()+":"+dateobj.getSeconds()
-    
-    let tmpNotes = tmpNotesDis.length === 0 ? notes:tmpNotesDis
-      for(let i=0;i<tmpNotes.length;i++){
-        if(tmpNotes[i].id === id){
-          tmpNotes[i].lastEdited = date+","+time
-          break
-        }
-    }
-    setTmpNotesDis(tmpNotes)
-    setNotes([])
-      
-  }
-  function updateInfo(e,id){
-    
-    let vl = e.target.value
-    let tmpNotes = tmpNotesDis.length === 0 ? notes:tmpNotesDis
-      
-    for(let i=0;i<tmpNotes.length;i++){
-        
-        if(tmpNotes[i].id === id){
-          
-          if(e.target.id === "title"){
-            tmpNotes[i].title = vl
-          }
-          if(e.target.id === "tagline"){
-            tmpNotes[i].tagline = vl
-          }
-          if(e.target.id === "body"){
-            tmpNotes[i].body = vl
-          }
-          break
-        }
-      }
-      setTmpNotesDis(tmpNotes)
-      setNotes([])
-  }
-
   let mainNotes = tmpNotesDis.length === 0 ? notes : tmpNotesDis
   mainNotes = mainNotes.slice(page===1?0:(6*(page-1)),(6*(page-1))+6)
   
@@ -198,7 +157,8 @@ import { Typography } from "@mui/material";
     <div className="Home">
       <Toaster/>
         <div className="header">
-            <h1>Notes Keeper</h1>
+            <a className="icon" href="/"><FontAwesomeIcon size="xl" icon={faClipboard} style={{color: "#d6d6d6",}} /> Note Keeper</a>
+            <a className="about" href="/">about</a>
         </div><br/>
         <div className="notetaker">
         
@@ -211,7 +171,7 @@ import { Typography } from "@mui/material";
           <br/><textarea placeholder="Body....." onChange={(e)=>{updateValue(e)}} value={body} id="body"></textarea>
           <br/>
           <div>
-            <button onClick={()=>createContext()}>create note</button>
+            <button onClick={()=>createContext()}>Add note</button>
             <button onClick={()=>setShowAddNotes(false)}>close</button>
           </div>
         </div>
@@ -226,13 +186,15 @@ import { Typography } from "@mui/material";
           {mainNotes.map((note,index)=>{
             return (<div className="card" key={index}
               style={
-                {boxShadow:note.pinned?"4px 4px 2px 2px rgb(18, 24, 11)":"4px 4px 2px 2px rgba(0,0,0,0.2)",border:note.pinned?"2px solid black":"2px solid rgba(0,0,0,0.2)"}}
+                {
+                  boxShadow:note.pinned?"2px 2px 2px 1px rgb(18, 24, 11)":"4px 4px 2px 2px rgba(0,0,0,0.2)",
+                  border:note.pinned?"0.3px solid black":"0.3px solid rgba(0,0,0,0.2)"}}
               >
 
             <div className="card-head">
                 <div>
-                     <h2>{note.title}</h2>
-                     <h5>{note.tagline}</h5>
+                     <h2 style={{wordWrap:"break-word",wordBreak:"break-word"}}>{note.title}</h2>
+                     <h5 style={{wordWrap:"break-word",wordBreak:"break-word"}}>{note.tagline}</h5>
                 </div>
                 <div>
                 <div style={{cursor:"pointer"}} onClick={()=>switchPin(note.pinned,note.id,note)}>
@@ -250,52 +212,16 @@ import { Typography } from "@mui/material";
             <div style={{display:"flex",justifyContent:"space-between"}}>
             <div style={{display:"flex",justifyContent:"space-between",cursor:"pointer",width:"12%"}}>
             
-            <div className='modal'>
-              <Popup trigger=
-                {<FontAwesomeIcon icon={faPenToSquare} size="sm"/>}
-                modal nested>
-                {
-                    close => (
-                        <div className='modal'>
-                            <div className='content'>
-                                <input 
-                                value={note.title}
-                                onChange={(e)=>updateInfo(e,note.id)}
-                                placeholder={note.title===""?'title........':''}
-                                id="title"
-                                /><br/>
-                                <input 
-                                value={note.tagline}
-                                onChange={(e)=>updateInfo(e,note.id)}
-                                placeholder={note.tagline===""?'tagline........':''}
-                                id="tagline"
-                                /><br/>
-                                <textarea
-                                value={note.body}
-                                onChange={(e)=>updateInfo(e,note.id)}
-                                placeholder={note.body===""?'body........':''}
-                                id="body"
-                                /><br/><br/>
-                                <button onClick={()=>{
-                                  Save(note.id)
-                                  close()
-                                  }}>Save</button>
-                                <button onClick={()=>close()}>Close</button>
-                            </div>
-                        </div>
-                        )
-                  }
-                </Popup>
-              </div>
-
-                 <FontAwesomeIcon icon={faTrash} size="sm" onClick={()=>deleteNote(note.id,note)}/>
+              <Editpop props={{...note,notes,setNotes,tmpNotesDis,setTmpNotesDis,notify}}/>
+              <FontAwesomeIcon icon={faTrash} size="sm" onClick={()=>deleteNote(note.id,note)}/>
             </div>
             <p style={{fontFamily:"monospace",fontSize:'small'}}>edited {note.lastEdited}</p>
             </div>
         </div>)
          })}
-        </div>
+        </div><br/>
          {mainNotes.length !== 0?
+      
           <div style={{textAlign:"center",display:"flex",justifyContent:"center",position:"relative"}}>
           <Stack spacing={2}>
              <Pagination 

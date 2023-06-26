@@ -1,16 +1,38 @@
 .header{
-  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.815);
   text-align: center;
   height: 70px;
-  color: white;
-  padding: 1%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 4%;
+  padding-right: 4%;
+  text-decoration: none;
+  position:relative;
+}
+
+.header a[class="icon"]{
+  text-decoration: none;
+  color: rgb(197, 197, 197);
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header a[class="about"]{
+  text-decoration: none;
+  color: rgb(197, 197, 197);
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  transform: translateY(-50%);
 }
 
 .Home{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  text-align: center;
 }
 
 .takeanote button{
@@ -31,22 +53,73 @@
 }
 
 
-.notes{
+
+/* .notes{
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   flex-direction: row;
   margin-top: 3%;
   transition:1s;
+} */
+
+
+.notes{
+  display: grid;
 }
+
+@media only screen and (max-width:750px) {
+  .notes{
+    grid-template-areas: 
+    'main'
+    'main'
+    'main'
+    'main'
+    'main'
+    'main'
+    ;
+    column-gap: 30px;
+    row-gap: 20px;
+    align-self: center;
+  
+  }
+}
+
+.notes{
+  
+  display: grid;
+  grid-template-areas: 
+  'main main main'
+  'main main main'
+  ;
+  column-gap: 30px;
+  row-gap: 20px;
+  align-self: center;
+}
+
+@media only screen and (max-width: 1200px) {
+  .notes{
+    display: grid;
+  grid-template-areas: 
+  'main main'
+  'main main'
+  'main main'
+  ;
+  column-gap: 30px;
+  row-gap: 20px;
+  align-self: center;
+  
+  }
+}
+
+
 
 .card{
     border-radius: 8px;
-    padding-left: 1%;
+    padding-left: 2%;
     padding-right: 1%;
     width: 300px;
     word-wrap: break-word;
-    margin:1%;
     height: fit-content;
 }
 
@@ -55,11 +128,24 @@
     color: #222121da;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
+    word-wrap: break-word;
     justify-content: space-between;
 }
 
+
+h2{
+  font-weight:600;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+h5{
+  font-weight: 200;
+  font-size: small;
+  
+}
 .card-body{
   font-size: smaller;
   font-family:'Courier New', Courier, monospace;
   font-weight: 200;
+  word-wrap: break-word;
 }
