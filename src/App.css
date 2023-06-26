@@ -1,5 +1,5 @@
 .header{
-  background-color: rgba(113, 238, 81, 0.61);
+  background-color: rgb(255, 255, 255);
   text-align: center;
   height: 70px;
   display: flex;
@@ -8,6 +8,7 @@
   padding-right: 4%;
   text-decoration: none;
   position:relative;
+  box-shadow: 0px 3px 0px 1px rgba(0,0,0,0.2);
 }
 
 .header a[class="icon"]{
@@ -32,6 +33,8 @@
 .Home{
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-y: visible;
 }
 
 .takeanote button{
@@ -66,6 +69,11 @@
 }
 
 
+.takeanote,.notetaker{
+  margin-top: 2%;
+}
+
+
 
 /* .notes{
   display: flex;
@@ -80,8 +88,8 @@
 .notes{
   display: grid;
   column-gap: 30px;
-    row-gap: 20px;
-    align-self: center;
+  row-gap: 20px;
+  align-self: center;
 }
 
 
@@ -102,7 +110,6 @@
     flex-direction: column;
   }
 }
-
 
 @media only screen and (max-width: 1200px) {
   .notes{
@@ -136,6 +143,24 @@
 }
 
 
+.footer{
+  position: absolute;
+  bottom: -100%;
+  width: 100%;
+  background-color: white;
+  height:max-content;
+  display: flex;
+  justify-content: space-around;
+  border-top: 2px solid rgba(0, 0, 0, 0.185);
+  flex-wrap: wrap;
+}
+
+
+.footer div a{
+  top:60%;
+  position: absolute;
+}
+
 h2{
   font-weight:600;
   font-family: 'Times New Roman', Times, serif;
@@ -151,4 +176,8 @@ h5{
   font-family:'Courier New', Courier, monospace;
   font-weight: 200;
   word-wrap: break-word;
+}
+
+.nav{
+  margin-top: 2%;
 }

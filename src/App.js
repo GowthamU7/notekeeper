@@ -10,7 +10,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark,faTrash,faClipboard,faPlus,faClone} from "@fortawesome/free-solid-svg-icons"
+import { faBookmark,faTrash,faClipboard,faPlus,faClone,faPenToSquare,faLink} from "@fortawesome/free-solid-svg-icons"
 
 
 
@@ -179,15 +179,23 @@ import Editpop from "./editPopUp";
 
   }
 
+  function gotoAbout(){
+    console.log(window.innerHeight)
+    window.scrollTo({top:window.innerHeight,left:0,behavior:"smooth"})
+  }
+
+
   let mainNotes = tmpNotesDis.length === 0 ? notes : tmpNotesDis
   mainNotes = mainNotes.slice(page===1?0:(6*(page-1)),(6*(page-1))+6)
   
+
+
   return (
     <div className="Home">
       <Toaster/>
         <div className="header">
-            <a className="icon" href="/notekeeper"><FontAwesomeIcon size="xl" icon={faClipboard} style={{color: "rgb(17, 1, 1)",}} /> Note Keeper</a>
-            <a className="about" href="#">about</a>
+            <a className="icon" href="/notekeeper"><FontAwesomeIcon size="xl" icon={faClipboard} style={{color: "rgba(113, 238, 81, 0.61)",}} /> Note Keeper</a>
+            <a className="about" href="#" onClick={()=>gotoAbout()}>about</a>
         </div><br/>
         <div className="notetaker">
         
@@ -242,14 +250,14 @@ import Editpop from "./editPopUp";
             <div style={{display:"flex",justifyContent:"space-between",cursor:"pointer",width:"18%"}}>
               <Editpop props={{...note,notes,setNotes,tmpNotesDis,setTmpNotesDis,notify}}/>|
               <FontAwesomeIcon icon={faTrash} size="sm" onClick={()=>deleteNote(note.id,note)}/>|
-              <FontAwesomeIcon icon={faClone} style={{color: "#111b2c"}} onClick={()=>createCopy(note.id)}/>
+              <FontAwesomeIcon icon={faClone} style={{color: "#111b2c"}} onClick={()=>createCopy(note.id)} size="sm"/>
             </div>
             <p style={{fontFamily:"monospace",fontSize:'small'}}>edit {note.lastEdited}</p>
             </div>
         </div>)
          })}
-        </div><br/>
-        <div style={{textAlign:"center",display:"flex",justifyContent:"center",position:"relative"}}>
+        </div>
+        <div className="nav" style={{textAlign:"center",display:"flex",justifyContent:"center",position:"relative"}}>
         {mainNotes.length !== 0?
         <Stack spacing={2}>
         <Pagination 
@@ -262,8 +270,35 @@ import Editpop from "./editPopUp";
         </Stack>:
        <p>empty........</p> 
     }
-      
           </div>
+    <div className="footer">
+        <div>
+        <ul>
+          <p>
+            <FontAwesomeIcon icon={faBookmark} style={{color: "green",}}/> click to pin/unpin a Note.
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faPenToSquare} style={{color: "green",}} size="sm"/> click to edit a Note
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faTrash} style={{color: "green",}} size="sm" /> click to delete a Note
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faClone}  style={{color: "green",}} size="sm"/> click to create a copy of a note
+          </p>
+          <p>
+          <FontAwesomeIcon icon={faPlus} size="sm" style={{color: "green",}} /> click to add a note
+          </p>
+        </ul>
+        </div>
+        <div>
+            <a 
+            style={{textDecoration:"none",color:"black"}}
+            href="https://gowthamu7.github.io/notekeeper/"
+            target="new"
+            ><FontAwesomeIcon icon={faLink} style={{color: "#32b335",}} /> Project Link</a>
+        </div>
+    </div>
     </div>
   );
 }
