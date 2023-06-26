@@ -232,7 +232,7 @@ import Editpop from "./editPopUp";
                onChange={handlePaginationChange}
                />
            </Stack>
-          </div>:"" 
+          </div>:<p>emply........</p> 
         }
     </div>
   );
